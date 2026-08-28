@@ -1,0 +1,27 @@
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# 后端编译产物
+springboot/target/
+target/
+*.class
+*.log
+
+# 上传的文件（图片等，视需求决定是否排除）
+# files/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 日志
+logs/
+*.log
