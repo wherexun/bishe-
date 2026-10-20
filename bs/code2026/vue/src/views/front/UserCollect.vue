@@ -34,7 +34,7 @@
     </div>
 
     <div v-if="data.total > 0">
-      <el-pagination style="background-color: white; width: fit-content; padding: 5px 10px; border-radius: 5px" @current-change="load" layout="total, prev, pager, next" v-model:page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total"/>
+      <el-pagination @current-change="load" background layout="total, prev, pager, next" v-model:page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total"/>
     </div>
   </div>
 </template>

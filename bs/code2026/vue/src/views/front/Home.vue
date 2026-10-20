@@ -129,10 +129,12 @@ request.get('/goods/selectAll', {
 <style>
 .item {
   cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .item:hover {
-  border: 2px solid red
+  transform: translateY(-10px);
+  box-shadow: 0 14px 30px rgba(40, 60, 120, 0.16), 0 0 0 2px rgba(245, 63, 63, 0.55);
 }
 
 .top-item:hover {

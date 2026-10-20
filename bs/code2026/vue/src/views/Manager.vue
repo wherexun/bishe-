@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div style="height: 60px; background-color: #2e3143; display: flex; align-items: center; border-bottom: 1px solid #ddd">
+    <div class="manager-top-bar">
       <div style="flex: 1">
         <div style="padding-left: 20px; display: flex; align-items: center">
-          <img src="@/assets/imgs/logo.png" alt="" style="width: 40px">
-          <div style="font-weight: bold; font-size: 24px; margin-left: 5px; color: #fff">校园小卖部</div>
+          <img src="@/assets/imgs/cart-icon.png" alt="" style="width: 34px; height: 34px">
+          <div style="font-weight: bold; font-size: 24px; margin-left: 8px; color: #fff">校园小卖部</div>
         </div>
       </div>
       <div style="width: fit-content; padding-right: 10px; display: flex; align-items: center;">
@@ -95,7 +95,6 @@
         <router-view @updateUser="updateUser" />
       </div>
     </div>
-
   </div>
 </template>
 
@@ -125,6 +124,16 @@ const logout = () => {
 </script>
 
 <style scoped>
+.manager-top-bar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #2e3143;
+  background-image: url('@/assets/imgs/manager-pattern.png');
+  background-size: 220px auto;
+  background-repeat: repeat;
+  border-bottom: 1px solid #ddd;
+}
 .el-menu-item.is-active {
   background-color: #d7d7e6 !important;
 }

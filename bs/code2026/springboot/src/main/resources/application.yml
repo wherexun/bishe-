@@ -3,6 +3,13 @@ server:
 
 # 数据库配置
 spring:
+  ai:
+    openai:
+      api-key: sk-91677264141943278bb0fd95f7b2a38b
+      base-url: https://api.deepseek.com
+      chat:
+        options:
+          model: deepseek-chat
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -22,5 +29,5 @@ mybatis:
 
 fileBaseUrl: http://localhost
 
-# 图片/文件存储的绝对路径（固定路径，避免因启动目录变化导致图片丢失）
+# 图片/文件存储的绝对路径
 filePath: E:/bishe/bishe/bs/code2026/files/

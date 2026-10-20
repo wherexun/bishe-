@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div style="height: 60px; background-color: #2e3143; display: flex; align-items: center;">
+    <div class="top-bar">
       <div style="width: 20%">
         <div style="padding-left: 20px; display: flex; align-items: center">
-          <img src="@/assets/imgs/logo.png" alt="" style="width: 40px">
-          <div style="font-weight: bold; font-size: 24px; margin-left: 5px; color: #fff">校园小卖部</div>
+          <img src="@/assets/imgs/cart-icon.png" alt="" style="width: 34px; height: 34px">
+          <div style="font-weight: bold; font-size: 24px; margin-left: 8px; color: #fff">校园小卖部</div>
         </div>
       </div>
       <div style="width: 60%; height: 60px; display: flex; align-items: center">
         <div style="flex: 1">
-          <el-menu router :default-active="router.currentRoute.value.path" style="background-color: #2e3143;" ellipsis mode="horizontal">
+          <el-menu router :default-active="router.currentRoute.value.path" style="background-color: transparent;" ellipsis mode="horizontal">
             <el-menu-item index="/front/home">首页</el-menu-item>
             <el-menu-item index="/front/goods">精选商品</el-menu-item>
             <el-menu-item index="/front/cart">购物车</el-menu-item>
@@ -32,6 +32,7 @@
           <div style="display: flex; align-items: center;">
             <img style="width: 40px; height: 40px; border-radius: 50%" :src="data.user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt="">
             <span style="color: #fff; margin-left: 5px">{{ data.user.name || '用户' }}</span>
+            <el-icon style="color: #fff; margin-left: 3px"><ArrowDown /></el-icon>
           </div>
           <template #dropdown>
             <el-dropdown-menu>
@@ -48,9 +49,10 @@
       </div>
     </div>
 
-    <div style="background-color: #f0f2ff">
+    <div style="background: linear-gradient(180deg, #eef1fb 0%, #f7f8fd 300px, #f7f8fd 100%); min-height: calc(100vh - 60px)">
       <router-view @updateUser="updateUser" />
     </div>
+    <AiChat />
 
     <Footer />
 
@@ -61,7 +63,9 @@
 import { reactive } from "vue";
 import router from "@/router";
 import {ElMessage} from "element-plus";
+import { ArrowDown } from "@element-plus/icons-vue";
 import Footer from "@/components/Footer.vue";
+import AiChat from "@/components/AiChat.vue";
 
 const data = reactive({
   user: JSON.parse(localStorage.getItem('system-user') || '{}'),
@@ -93,6 +97,15 @@ const updateUser = () => {
 </script>
 
 <style>
+.top-bar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #2e3143;
+  background-image: url('@/assets/imgs/header-pattern.png');
+  background-size: 220px auto;
+  background-repeat: repeat;
+}
 .el-tooltip__trigger {
   cursor: pointer;
   outline: none !important;

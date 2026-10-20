@@ -13,11 +13,9 @@ dist-ssr/
 springboot/target/
 target/
 *.class
-*.log
+
+# 工具临时目录
+.workbuddy/
 
 # OS
-.DS_Store
-Thumbs.db
-
-# 日志
-logs/
+.DS_Stor

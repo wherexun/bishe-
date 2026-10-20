@@ -30,7 +30,7 @@
       </el-row>
 
       <div v-if="data.total > 0">
-        <el-pagination style="background-color: white; width: fit-content; padding: 5px 10px; border-radius: 5px" @current-change="load" layout="total, prev, pager, next" v-model:page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total"/>
+        <el-pagination @current-change="load" background layout="total, prev, pager, next" v-model:page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total"/>
       </div>
     </div>
     <div v-else style="padding: 50px; text-align: center; color: #666">暂无数据...</div>
@@ -98,9 +98,10 @@ clearPathParam()
 }
 .goods-item {
   cursor: pointer;
-  transition: all 0.5s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .goods-item:hover {
-  transform: scale(1.05);
+  transform: translateY(-10px);
+  box-shadow: 0 14px 30px rgba(40, 60, 120, 0.16), 0 0 0 2px rgba(245, 63, 63, 0.55);
 }
 </style>

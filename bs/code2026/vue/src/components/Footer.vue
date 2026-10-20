@@ -3,7 +3,7 @@
     <div style="width: 30%; margin: 0 auto;">
       <!-- Logo 和标题 -->
       <div style="padding: 20px 0; display: flex; grid-gap: 5px; justify-content: center; align-items: center;">
-        <img src="@/assets/imgs/logo.png" alt="" style="width: 30px;">
+        <img src="@/assets/imgs/cart-icon.png" alt="" style="width: 30px;">
         <div style="font-size: 25px;">校园小卖部</div>
       </div>
       <!-- 联系信息 -->

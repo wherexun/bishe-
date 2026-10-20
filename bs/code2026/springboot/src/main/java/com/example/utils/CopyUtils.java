@@ -6,9 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import java.io.File;
 
 /**
- * 作者：程序员青戈
- * 主页：https://space.bilibili.com/402779077
- * 网址：https://javaxm.cn/
+ * 代码复制工具类
  */
 public class CopyUtils {
     private static String packagePath = System.getProperty("user.dir") + "/springboot/src/main/java/com/example";

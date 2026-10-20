@@ -37,6 +37,9 @@
       </div>
       <div v-if="data.current === '商品详情'" style="padding: 10px" v-html="data.goods.content"></div>
       <div v-if="data.current === '商品评价'" style="min-height: 700px">
+        <div style="padding: 15px 20px 0; text-align: right">
+          <el-button type="primary" @click="openComment">写评价</el-button>
+        </div>
         <div v-if="data.commentList.length === 0" style="padding: 50px; text-align: center; color: #666">暂无评价...</div>
         <div v-if="data.commentList.length > 0" style="padding: 20px;">
           <!--          显示评论列表-->
@@ -52,12 +55,29 @@
             </div>
           </div>
           <div style="margin-top: 20px">
-            <el-pagination @current-change="loadComment" layout="total, prev, pager, next" v-model:page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total"/>
+            <el-pagination @current-change="loadComment" background layout="total, prev, pager, next" v-model:page-size="data.pageSize" v-model:current-page="data.pageNum" :total="data.total"/>
           </div>
         </div>
       </div>
 
     </div>
+
+    <el-dialog title="评价信息" width="30%" v-model="data.commentVisible" :close-on-click-modal="false" destroy-on-close>
+      <el-form ref="commentRef" :model="data.commentForm" :rules="data.commentRules" label-width="80px" style="padding-right: 30px; padding-top: 20px">
+        <el-form-item label="评分" prop="score">
+          <el-rate show-score allow-half v-model="data.commentForm.score"></el-rate>
+        </el-form-item>
+        <el-form-item label="内容" prop="content">
+          <el-input type="textarea" :rows="3" v-model="data.commentForm.content" autocomplete="off" placeholder="请输入评价内容" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="data.commentVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveComment">保 存</el-button>
+      </span>
+      </template>
+    </el-dialog>
 
     <el-dialog title="下单信息" width="30%" v-model="data.formVisible" :close-on-click-modal="false" destroy-on-close>
       <el-form ref="formRef" :model="data.form" :rules="data.rules" label-width="100px" style="padding-right: 30px">
@@ -89,6 +109,7 @@ import request from "@/utils/request";
 import {ElMessage} from "element-plus";
 
 const formRef = ref()
+const commentRef = ref()
 const data = reactive({
   user: JSON.parse(localStorage.getItem('system-user') || '{}'),
   id: router.currentRoute.value.query.id,
@@ -102,6 +123,8 @@ const data = reactive({
   userCollect: {},
   form: {},
   formVisible: false,
+  commentForm: {},
+  commentVisible: false,
   rules: {
     deliverType: [
       {required: true, message: '请选择配送类型', trigger: 'change'}
@@ -109,8 +132,37 @@ const data = reactive({
     address: [
       {required: true, message: '请输入配送地址', trigger: 'blur', whitespace: true}
     ]
+  },
+  commentRules: {
+    score: [
+      {required: true, message: '请输入评分', trigger: 'change'}
+    ],
+    content: [
+      {required: true, message: '请输入内容', trigger: 'blur', whitespace: true}
+    ]
   }
 })
+
+const openComment = () => {
+  data.commentForm = { goodsId: data.id, userId: data.user.id }
+  data.commentVisible = true
+}
+
+const saveComment = () => {
+  commentRef.value.validate(valid => {
+    if (valid) {
+      request.post('/comment/add', data.commentForm).then(res => {
+        if (res.code === '200') {
+          ElMessage.success('评价成功')
+          data.commentVisible = false
+          loadComment()
+        } else {
+          ElMessage.error(res.msg)
+        }
+      })
+    }
+  })
+}
 
 const loadComment = () => {
   request.get('/comment/selectPage', {
